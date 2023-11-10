@@ -30,14 +30,16 @@ exports.mostrarFacturas = async (req, res, next) => {
 }
 
 exports.mostrarFactura = async (req, res, next) => {
-    const movimiento = await Stock.findOne(
-        { include: [{ association: Stock.Proveedor }], where: { id: req.params.idStock } }
-    )
-    if (!movimiento) {
+
+    try {
+        const movimiento = await Stock.findOne(
+            { include: [{ association: Stock.Proveedor }], where: { id: req.params.idStock } }
+        )
+        res.json(movimiento)
+    } catch (error) {
         console.log(error);
-        next()
+        next(error)
     }
-    res.json(movimiento)
 }
 
 exports.eliminarFactura = async (req, res, next) => {

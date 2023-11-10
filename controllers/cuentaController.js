@@ -43,12 +43,13 @@ exports.mostrarCCS = async (req, res, next) => {
 };
 exports.mostrarCC = async (req, res, next) => {
     let condition = { where: { id: req.params.idCC } }
-    const cc = await CuentaCorriente.findOne(condition)
-    if (!cc) {
+    try {
+        const cc = await CuentaCorriente.findOne(condition)
+        res.json(cc)
+    } catch (error) {
         console.log(error);
-        next()
+        next(error)
     }
-    res.json(cc);
 };
 
 exports.editarCC = async (req, res, next) => {
