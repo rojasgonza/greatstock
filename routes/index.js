@@ -50,6 +50,11 @@ module.exports = function () {
     //usuarios
     router.post('/crear-cuenta', usuariosController.registrarUsuario)
     router.post('/iniciar-sesion', usuariosController.iniciarSesion)
+    // Ruta para enviar el correo de recuperación de contraseña
+    router.post('/enviar-recuperacion-contrasena', usuariosController.enviarRecuperacionContrasena);
+
+    // Ruta para restablecer la contraseña con el token proporcionado
+    router.post('/restablecer-contrasena', usuariosController.restablecerContrasena);
 
     return router;
 }
