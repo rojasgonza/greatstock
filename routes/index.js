@@ -6,6 +6,8 @@ const insumosController = require('../controllers/insumosController')
 const proveedorController = require('../controllers/proveedorController')
 const stockController = require('../controllers/stockController')
 const usuariosController = require('../controllers/usuariosController')
+const detallespController = require('../controllers/detallespController')
+const pedidosController = require('../controllers/pedidosController')
 const auth = require('../middleware/auth')
 module.exports = function () {
     router.post('/cuenta', auth, cuentaController.nuevaCC)
@@ -45,7 +47,13 @@ module.exports = function () {
     router.get('/stockactual', auth, stockController.stockActual)
     router.get('/ultimomovstock', auth, stockController.ultimoMovstock)
 
+    router.post('/detalle-pedido', detallespController.nuevoDetalleP)
+    router.get('/detalle-pedido/:id', detallespController.mostrarDetallesFact)
 
+    router.post('/pedidos', auth, pedidosController.nuevoPedido)
+    router.get('/pedidos', auth, pedidosController.mostrarPedidos)
+    router.get('/pedidos/:id', auth, pedidosController.mostrarPedido)
+    router.delete('/pedidos/eliminar/:id', auth, pedidosController.eliminarPedido)
 
     //usuarios
     router.post('/crear-cuenta', usuariosController.registrarUsuario)
